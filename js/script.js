@@ -16,7 +16,7 @@ pokemonList[0] = {
     defense: 3,
     specialAttack: 4,
     specialDefense: 4,
-    speed: 3,
+    speed: 3
   }
 };
 
@@ -33,7 +33,7 @@ pokemonList[1] = {
     defense: 4,
     specialAttack: 5,
     specialDefense: 5,
-    speed: 4,
+    speed: 4
   }
 };
 
@@ -50,7 +50,7 @@ pokemonList[2] = {
     defense: 5,
     specialAttack: 6,
     specialDefense: 6,
-    speed: 5,
+    speed: 5
   }
 };
 
@@ -67,7 +67,7 @@ pokemonList[3] = {
     defense: 3,
     specialAttack: 4,
     specialDefense: 3,
-    speed: 4,
+    speed: 4
   }
 };
 
@@ -76,8 +76,8 @@ let pokemonNumber = 1;
 function heightInFeet(heightInInches) {
   return {
     feet: Math.floor(heightInInches / 12),
-    inches: heightInInches % 12,
-  }
+    inches: heightInInches % 12
+  };
 }
 
 let htmlOutput =
