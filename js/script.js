@@ -70,3 +70,21 @@ pokemonList[3] = {
     speed: 4,
   }
 };
+
+let pokemonNumber = 1;
+
+function heightInFeet(heightInInches) {
+  return {
+    feet: Math.floor(heightInInches / 12),
+    inches: heightInInches % 12,
+  }
+}
+
+let htmlOutput =
+`Name: ${pokemonList[pokemonNumber].name} <br/>
+Category: ${pokemonList[pokemonNumber].category} <br/>
+Height: ${ heightInFeet( pokemonList[pokemonNumber].height ).feet }'
+${ heightInFeet( pokemonList[pokemonNumber].height ).inches }'' <br/>
+Weight: ${pokemonList[pokemonNumber].weight} lbs`;
+
+document.write(htmlOutput);
