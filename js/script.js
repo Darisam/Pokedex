@@ -4,7 +4,7 @@ let pokemonList = [];
 // The height of a Pokemon is given in inches, the weight in pounds.
 
 pokemonList[0] = {
-  name: 'Bulbasaur'",
+  name: 'Bulbasaur',
   category: 'Seed',
   height: 28,
   weight: 15.2,
