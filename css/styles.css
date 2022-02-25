@@ -1,1 +1,32 @@
-body
+* { box-sizing: border-box; }
+
+html {
+  font-size: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.main-content {
+  max-width: 60rem;
+}
+
+h1 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+.pokemon-list {
+  list-style: none;
+  margin: auto;
+  padding: 0;
+  width: 36rem;
+}
+
+.pokemon-list__item {
+  background-color: #dddddd;
+  border: 1px solid #000000;
+  font-size: 1.25rem;
+  padding: 0.125em 0.25em;
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+  width: 30rem;
+}
