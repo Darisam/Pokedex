@@ -96,3 +96,12 @@ ${(pokemonList[i].height > 70 ? '- Wow, that\'s big!' : '')}
 }
 
 document.write(htmlOutput);
+/* let pokemonText = '';
+
+for(let i = 0; i < pokemonList.length; i++) {
+  pokemonText = `${pokemonList[i].name} `;
+  pokemonText += `(height: ${heightInFeet( pokemonList[i].height ).feet}'
+  ${heightInFeet( pokemonList[i].height ).inches}'')`;
+  pokemonText += (pokemonList[i].height > 70 ? ' - Wow, that\'s big!' : '');
+  document.write(`<li class="pokemon-list__item"> ${pokemonText} </li>`);
+} */
