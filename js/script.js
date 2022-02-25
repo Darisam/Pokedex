@@ -71,8 +71,6 @@ pokemonList[3] = {
   }
 };
 
-let pokemonNumber = 1;
-
 function heightInFeet(heightInInches) {
   return {
     feet: Math.floor(heightInInches / 12),
@@ -80,12 +78,6 @@ function heightInFeet(heightInInches) {
   };
 }
 
-let htmlOutput =
-`Name: ${pokemonList[pokemonNumber].name} <br/>
-Category: ${pokemonList[pokemonNumber].category} <br/>
-Height: ${ heightInFeet( pokemonList[pokemonNumber].height ).feet }'
-${ heightInFeet( pokemonList[pokemonNumber].height ).inches }'' <br/>
-Weight: ${pokemonList[pokemonNumber].weight} lbs`;
 for(let i = 0; i < pokemonList.length; i++) {
 document.write( `<li class="pokemon-list__item">
 ${pokemonList[i].name}
@@ -95,7 +87,6 @@ ${(pokemonList[i].height > 70 ? '- Wow, that\'s big!' : '')}
 </li>` );
 }
 
-document.write(htmlOutput);
 /* let pokemonText = '';
 
 for(let i = 0; i < pokemonList.length; i++) {
