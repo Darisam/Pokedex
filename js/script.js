@@ -86,5 +86,13 @@ Category: ${pokemonList[pokemonNumber].category} <br/>
 Height: ${ heightInFeet( pokemonList[pokemonNumber].height ).feet }'
 ${ heightInFeet( pokemonList[pokemonNumber].height ).inches }'' <br/>
 Weight: ${pokemonList[pokemonNumber].weight} lbs`;
+for(let i = 0; i < pokemonList.length; i++) {
+document.write( `<li class="pokemon-list__item">
+${pokemonList[i].name}
+(height: ${ heightInFeet( pokemonList[i].height ).feet }'
+${ heightInFeet( pokemonList[i].height ).inches }'')
+${(pokemonList[i].height > 70 ? '- Wow, that\'s big!' : '')}
+</li>` );
+}
 
 document.write(htmlOutput);
