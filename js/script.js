@@ -78,6 +78,10 @@ function heightInFeet(heightInInches) {
   };
 }
 
+/* This loops assembles a big teplate literal consisting of first the name
+of the Pokemon, second its height and third a comment if it is bigger than
+70''. Last it is enclosed in <li> tags and wriiten into index.html. */
+
 for(let i = 0; i < pokemonList.length; i++) {
 document.write( `<li class="pokemon-list__item">
 ${pokemonList[i].name}
@@ -86,6 +90,9 @@ ${ heightInFeet( pokemonList[i].height ).inches }'')
 ${(pokemonList[i].height > 70 ? '- Wow, that\'s big!' : '')}
 </li>` );
 }
+
+/* This ia an alternative approach that first assembles the string in the
+pokemonText variable. */
 
 /* let pokemonText = '';
 
