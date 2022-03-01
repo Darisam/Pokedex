@@ -69,8 +69,6 @@ const pokemonRepository = (function() {
     }
   );
 
-/* This ia an alternative approach that first assembles the string in the
-pokemonText variable. */
   pokemonRepository.add(
     {
       name: 'Ivysaur',
@@ -109,7 +107,6 @@ pokemonText variable. */
     }
   );
 
-/* let pokemonText = '';
   pokemonRepository.add(
     {
       name: "Charmander",
@@ -129,13 +126,6 @@ pokemonText variable. */
     }
   );
 
-for(let i = 0; i < pokemonList.length; i++) {
-  pokemonText = `${pokemonList[i].name} `;
-  pokemonText += `(height: ${heightInFeet( pokemonList[i].height ).feet}'
-  ${heightInFeet( pokemonList[i].height ).inches}'')`;
-  pokemonText += (pokemonList[i].height > 70 ? ' - Wow, that\'s big!' : '');
-  document.write(`<li class="pokemon-list__item"> ${pokemonText} </li>`);
-} */
   // Html output section
 
   /* This function assembles a big template literal consisting of first the name
