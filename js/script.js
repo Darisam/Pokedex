@@ -13,6 +13,13 @@ function arrayCompare(array1, array2) {
   return true;
 }
 
+function heightInFeet(heightInInches) {
+  return {
+    feet: Math.floor(heightInInches / 12),
+    inches: heightInInches % 12
+  };
+}
+
 const pokemonRepository = (function() {
 
   const pokemonList = [];
@@ -40,12 +47,6 @@ received copy can't be used to modify the original pokemonList. */
     else console.log('Item is not an object.');
     }
 
-  function heightInFeet(heightInInches) {
-    return {
-      feet: Math.floor(heightInInches / 12),
-      inches: heightInInches % 12
-    };
-  }
     function checkName(pokemon) {return pokemon.name === this.toString();}
 
   // Adding some raw data to the repository so we have something to work with.
