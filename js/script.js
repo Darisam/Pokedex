@@ -155,3 +155,4 @@ function documentWrite(pokemon) {
 
 pokemonRepository.getAll().forEach(documentWrite);
 
+documentWrite(pokemonRepository.getByName('Ivysaur')[0]);
