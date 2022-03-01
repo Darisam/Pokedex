@@ -2,7 +2,10 @@
 // This function test whether two arrays are the same in terms of length and content.
 
 function arrayCompare(array1, array2) {
-  if (Array.isArray(array1) === false || Array.isArray(array1) === false || array1.length !== array2.length) {
+  if (Array.isArray(array1) === false ||
+  Array.isArray(array2) === false ||
+  array1.length !== array2.length)
+  {
     return false;
   }
   for (let i = 0; i < array1.length; i++) {
@@ -23,7 +26,8 @@ function heightInFeet(heightInInches) {
 const pokemonRepository = (function() {
 
   const pokemonList = [];
-  const keyTemplate = ["name", "category", "height", "weight", "type", "weakness", "stats"];
+  const keyTemplate =
+  ["name", "category", "height", "weight", "type", "weakness", "stats"];
 
 /* The JSON methods are in the function to make sure it return a completely
 new list of completely new objects of completely new... etc. This way the
