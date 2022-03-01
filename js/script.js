@@ -23,6 +23,8 @@ function heightInFeet(heightInInches) {
   };
 }
 
+// The IIFE containing the pokemon list and associated methods.
+
 const pokemonRepository = (function() {
 
   const pokemonList = [];
