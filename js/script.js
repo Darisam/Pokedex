@@ -18,7 +18,13 @@ const pokemonRepository = (function() {
   const pokemonList = [];
   const keyTemplate = ["name", "category", "height", "weight", "type", "weakness", "stats"];
 
-  function getAll() {return pokemonList;}
+/* The JSON methods are in the function to make sure it return a completely
+new list of completely new objects of completely new... etc. This way the
+received copy can't be used to modify the original pokemonList. */
+
+  function getAll() {
+     return JSON.parse(JSON.stringify(pokemonList));
+  }
 
   function addToList(pokemon) {
     if (typeof(pokemon) === 'object') {
