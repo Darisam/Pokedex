@@ -29,14 +29,14 @@ const pokemonRepository = (function() {
       add: addToList
     };
   })();
+
+  function heightInFeet(heightInInches) {
+    return {
+      feet: Math.floor(heightInInches / 12),
+      inches: heightInInches % 12
+    };
   }
 
-function heightInFeet(heightInInches) {
-  return {
-    feet: Math.floor(heightInInches / 12),
-    inches: heightInInches % 12
-  };
-}
 
 /* This loops assembles a big teplate literal consisting of first the name
 of the Pokemon, second its height and third a comment if it is bigger than
