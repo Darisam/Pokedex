@@ -27,7 +27,7 @@ received copy can't be used to modify the original pokemonList. */
   }
 
   function addToList(pokemon) {
-    if (typeof(pokemon) === 'object') {
+    if (typeof pokemon === 'object') {
       if (arrayCompare(keyTemplate, Object.keys(pokemon)) === true) {
         pokemonList.push(pokemon);
       }
