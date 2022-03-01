@@ -49,6 +49,7 @@ const pokemonRepository = (function() {
     };
   }
 
+  // Adding some raw data to the repository so we have something to work with.
 
   pokemonRepository.add(
     {
