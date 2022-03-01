@@ -50,18 +50,6 @@ const pokemonRepository = (function() {
   }
 
 
-/* This loops assembles a big teplate literal consisting of first the name
-of the Pokemon, second its height and third a comment if it is bigger than
-70''. Last it is enclosed in <li> tags and wriiten into index.html. */
-
-for(let i = 0; i < pokemonList.length; i++) {
-document.write( `<li class="pokemon-list__item">
-${pokemonList[i].name}
-(height: ${ heightInFeet( pokemonList[i].height ).feet }'
-${ heightInFeet( pokemonList[i].height ).inches }'')
-${(pokemonList[i].height > 70 ? '- Wow, that\'s big!' : '')}
-</li>` );
-}
   pokemonRepository.add(
     {
       name: 'Bulbasaur',
@@ -148,3 +136,19 @@ for(let i = 0; i < pokemonList.length; i++) {
   pokemonText += (pokemonList[i].height > 70 ? ' - Wow, that\'s big!' : '');
   document.write(`<li class="pokemon-list__item"> ${pokemonText} </li>`);
 } */
+  // Html output section
+
+  /* This function assembles a big template literal consisting of first the name
+  of the Pokemon, second its height, and third a comment if it is bigger than
+  70''. Last the template is enclosed in <li> tags and written into index.html. */
+
+  function documentWrite(pokemon) {
+    document.write( `<li class="pokemon-list__item">
+    ${pokemon.name}
+    (height: ${ heightInFeet( pokemon.height ).feet }'
+    ${ heightInFeet( pokemon.height ).inches }'')
+    ${(pokemon.height > 70 ? '- Wow, that\'s big!' : '')}
+    </li>` );
+  }
+
+  pokemonRepository.getAll().forEach(documentWrite);
