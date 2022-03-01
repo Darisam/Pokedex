@@ -44,29 +44,11 @@ received copy can't be used to modify the original pokemonList. */
           : pokemon.name + ' is not a properly formated pokemon.' );
         }
       }
-    else console.log('Item is not an object.');
+      else console.log('Item is not an object.');
     }
 
     function checkName(pokemon) {return pokemon.name === this.toString();}
 
-  // Adding some raw data to the repository so we have something to work with.
-
-  pokemonRepository.add(
-    {
-      name: 'Bulbasaur',
-      category: 'Seed',
-      height: 28,
-      weight: 15.2,
-      type: ['Grass', 'Poison'],
-      weakness: ['Fire', 'Psychic', 'Flying', 'Ice'],
-      stats: {
-        hp: 3,
-        attack: 3,
-        defense: 3,
-        specialAttack: 4,
-        specialDefense: 4,
-        speed: 3
-      }
     function getByName(name) {
       return JSON.parse(JSON.stringify(pokemonList.filter(checkName, name)));
 }
@@ -78,79 +60,98 @@ return {
 };
 })();
 
+// Adding some raw data to the repository so we have something to work with.
+
+pokemonRepository.add(
+  {
+    name: 'Bulbasaur',
+    category: 'Seed',
+    height: 28,
+    weight: 15.2,
+    type: ['Grass', 'Poison'],
+    weakness: ['Fire', 'Psychic', 'Flying', 'Ice'],
+    stats: {
+      hp: 3,
+      attack: 3,
+      defense: 3,
+      specialAttack: 4,
+      specialDefense: 4,
+      speed: 3
     }
-  );
-
-  pokemonRepository.add(
-    {
-      name: 'Ivysaur',
-      category: 'Seed',
-      height: 39,
-      weight: 28.7,
-      type: ['Grass', 'Poison'],
-      weakness: ['Fire', 'Psychic', 'Flying', 'Ice'],
-      stats: {
-        hp: 4,
-        attack: 4,
-        defense: 4,
-        specialAttack: 5,
-        specialDefense: 5,
-        speed: 4
-      }
-    }
-  );
-
-  pokemonRepository.add(
-    {
-      name: 'Venusaur',
-      category: 'Seed',
-      height: 79,
-      weight: 220.5,
-      type: ['Grass', 'Poison'],
-      weakness: ['Fire', 'Psychic', 'Flying', 'Ice'],
-      stats: {
-        hp: 5,
-        attack: 5,
-        defense: 5,
-        specialAttack: 6,
-        specialDefense: 6,
-        speed: 5
-      }
-    }
-  );
-
-  pokemonRepository.add(
-    {
-      name: "Charmander",
-      category: 'Lizard',
-      height: 24,
-      weight: 18.7,
-      type: ['Fire'],
-      weakness: ['Water', 'Ground', 'Rock'],
-      stats: {
-        hp: 3,
-        attack: 4,
-        defense: 3,
-        specialAttack: 4,
-        specialDefense: 3,
-        speed: 4
-      }
-    }
-  );
-
-  // Html output section
-
-  /* This function assembles a big template literal consisting of first the name
-  of the Pokemon, second its height, and third a comment if it is bigger than
-  70''. Last the template is enclosed in <li> tags and written into index.html. */
-
-  function documentWrite(pokemon) {
-    document.write( `<li class="pokemon-list__item">
-    ${pokemon.name}
-    (height: ${ heightInFeet( pokemon.height ).feet }'
-    ${ heightInFeet( pokemon.height ).inches }'')
-    ${(pokemon.height > 70 ? '- Wow, that\'s big!' : '')}
-    </li>` );
   }
+);
 
-  pokemonRepository.getAll().forEach(documentWrite);
+pokemonRepository.add(
+  {
+    name: 'Ivysaur',
+    category: 'Seed',
+    height: 39,
+    weight: 28.7,
+    type: ['Grass', 'Poison'],
+    weakness: ['Fire', 'Psychic', 'Flying', 'Ice'],
+    stats: {
+      hp: 4,
+      attack: 4,
+      defense: 4,
+      specialAttack: 5,
+      specialDefense: 5,
+      speed: 4
+    }
+  }
+);
+
+pokemonRepository.add(
+  {
+    name: 'Venusaur',
+    category: 'Seed',
+    height: 79,
+    weight: 220.5,
+    type: ['Grass', 'Poison'],
+    weakness: ['Fire', 'Psychic', 'Flying', 'Ice'],
+    stats: {
+      hp: 5,
+      attack: 5,
+      defense: 5,
+      specialAttack: 6,
+      specialDefense: 6,
+      speed: 5
+    }
+  }
+);
+
+pokemonRepository.add(
+  {
+    name: 'Charmander',
+    category: 'Lizard',
+    height: 24,
+    weight: 18.7,
+    type: ['Fire'],
+    weakness: ['Water', 'Ground', 'Rock'],
+    stats: {
+      hp: 3,
+      attack: 4,
+      defense: 3,
+      specialAttack: 4,
+      specialDefense: 3,
+      speed: 4
+    }
+  }
+);
+
+// Html output section
+
+/* This function assembles a big template literal consisting of first the name
+of the Pokemon, second its height, and third a comment if it is bigger than
+70''. Last the template is enclosed in <li> tags and written into index.html. */
+
+function documentWrite(pokemon) {
+  document.write( `<li class="pokemon-list__item">
+  ${pokemon.name}
+  (height: ${ heightInFeet( pokemon.height ).feet }'
+  ${ heightInFeet( pokemon.height ).inches }'')
+  ${(pokemon.height > 70 ? '- Wow, that\'s big!' : '')}
+  </li>` );
+}
+
+pokemonRepository.getAll().forEach(documentWrite);
+
