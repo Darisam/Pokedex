@@ -161,4 +161,4 @@ function pokemonWrite(pokemon) {
 
 pokemonRepository.getAll().forEach(pokemonWrite);
 
-pokemontWrite(pokemonRepository.getByName('Ivysaur')[0]);
+pokemonWrite(pokemonRepository.getByName('Ivysaur')[0]);
