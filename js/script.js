@@ -1,11 +1,11 @@
 
-// This function test whether two arrays are the same in terms of length and content.
+/* This function tests whether two arrays are the same in terms
+of length and content. */
 
 function arrayCompare(array1, array2) {
   if (Array.isArray(array1) === false ||
   Array.isArray(array2) === false ||
-  array1.length !== array2.length)
-  {
+  array1.length !== array2.length) {
     return false;
   }
   for (let i = 0; i < array1.length; i++) {
