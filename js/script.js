@@ -39,7 +39,7 @@ const pokemonRepository = (function() {
     return JSON.parse(JSON.stringify(pokemonList));
   }
 
-  function addToList(pokemon) {
+  function add(pokemon) {
     if (typeof pokemon === 'object') {
       if (arrayCompare(keyTemplate, Object.keys(pokemon)) === true) {
         pokemonList.push(pokemon);
@@ -54,6 +54,7 @@ const pokemonRepository = (function() {
       else console.log('pokemonRepository.add: Type of item is not object.');
     }
 
+
     function checkName(pokemon) {return pokemon.name === this.toString();}
 
     function getByName(name) {
@@ -63,7 +64,7 @@ const pokemonRepository = (function() {
     return {
       getAll: getAll,
       getByName: getByName,
-      add: addToList
+      add: add
     };
   })();
 
