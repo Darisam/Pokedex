@@ -163,5 +163,3 @@ const pokemonRepository = (function() {
   }
 
   pokemonRepository.getAll().forEach(pokemonWrite);
-
-  pokemonWrite(pokemonRepository.getByName('Ivysaur')[0]);
