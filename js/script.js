@@ -150,7 +150,7 @@ pokemonRepository.add(
 of the Pokemon, second its height, and third a comment if it is bigger than
 70''. Last the template is enclosed in <li> tags and written into index.html. */
 
-function documentWrite(pokemon) {
+function pokemonWrite(pokemon) {
   document.write( `<li class="pokemon-list__item">
   ${pokemon.name}
   (height: ${ heightInFeet( pokemon.height ).feet }'
@@ -159,6 +159,6 @@ function documentWrite(pokemon) {
   </li>` );
 }
 
-pokemonRepository.getAll().forEach(documentWrite);
+pokemonRepository.getAll().forEach(pokemonWrite);
 
-documentWrite(pokemonRepository.getByName('Ivysaur')[0]);
+pokemontWrite(pokemonRepository.getByName('Ivysaur')[0]);
