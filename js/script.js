@@ -54,6 +54,7 @@ const pokemonRepository = (function() {
       else console.log('pokemonRepository.add: Type of item is not object.');
     }
 
+    // This function acts as a test function in the getByName function. 
 
     function checkName(pokemon) {return pokemon.name === this.toString();}
 
