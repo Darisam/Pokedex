@@ -31,12 +31,12 @@ const pokemonRepository = (function() {
   const keyTemplate =
   ["name", "category", "height", "weight", "type", "weakness", "stats"];
 
-/* The JSON methods are in the function to make sure it returns a completely
-new list of completely new objects of completely new... etc. This way the
-received copy can't be used to modify the original pokemonList. */
+  /* The JSON methods are in the function to make sure it returns a completely
+  new list of completely new objects of completely new... etc. This way the
+  received copy can't be used to modify the original pokemonList. */
 
   function getAll() {
-     return JSON.parse(JSON.stringify(pokemonList));
+    return JSON.parse(JSON.stringify(pokemonList));
   }
 
   function addToList(pokemon) {
@@ -46,11 +46,12 @@ received copy can't be used to modify the original pokemonList. */
       }
       else {
         console.log(pokemon.name === undefined ?
-          'Item is not a proper object or lacks a name key.'
-          : pokemon.name + ' is not a properly formated pokemon.' );
+          'pokemonRepository.add: Item is not a proper object or lacks a name key.'
+          : 'pokemonRepository.add: ' + pokemon.name +
+          ' is not a properly formated pokemon.' );
         }
       }
-      else console.log('Item is not an object.');
+      else console.log('pokemonRepository.add: Type of item is not object.');
     }
 
     function checkName(pokemon) {return pokemon.name === this.toString();}
