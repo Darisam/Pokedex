@@ -31,7 +31,7 @@ const pokemonRepository = (function() {
   const keyTemplate =
   ["name", "category", "height", "weight", "type", "weakness", "stats"];
 
-/* The JSON methods are in the function to make sure it return a completely
+/* The JSON methods are in the function to make sure it returns a completely
 new list of completely new objects of completely new... etc. This way the
 received copy can't be used to modify the original pokemonList. */
 
