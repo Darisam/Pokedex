@@ -1,3 +1,6 @@
+/* All the pointless white borders are in the sheet so I can turn them on
+with search-replace and see where exactly the boxes are. */
+
 * { box-sizing: border-box; }
 
 html {
