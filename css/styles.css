@@ -131,4 +131,17 @@ div.category {
   flex-shrink: 0;
   flex-grow: 0;
 }
+
+@media screen and (max-width: 1090px) {
+
+  .properties-grid {
+    grid-template-columns: 1fr;
+    grid-column-gap: 0;
+  }
+
+  div.category {
+    grid-column: 1 / 2;
+  }
+}
+
 }
