@@ -54,9 +54,11 @@ const pokemonRepository = (function() {
       else console.log('pokemonRepository.add: Type of item is not object.');
     }
 
-    // This function acts as a test function in the getByName function. 
+    // This function acts as a test function in the getByName function.
 
-    function checkName(pokemon) {return pokemon.name === this.toString();}
+    function checkName(pokemon) {
+      return pokemon.name.toUpperCase() === this.toString().toUpperCase();
+    }
 
     function getByName(name) {
       return JSON.parse(JSON.stringify(pokemonList.filter(checkName, name)));
