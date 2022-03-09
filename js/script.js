@@ -183,6 +183,21 @@ const pokemonRepository = (function() {
   }
 
   pokemonRepository.getAll().forEach(pokemonWrite);
+
+    // Create the functionality of the hamburger menu
+
+    const menuButton = document.querySelector('.hamburger-menu');
+    const menuList = document.querySelector('.pokemon-list');
+
+    menuButton.addEventListener('click', function() {
+      menuList.classList.toggle('present');
+    })
+
+    function showDetails(pokemon) {
+      console.log(pokemon.name);
+      menuList.classList.remove('present');
+    }
+
     // Write the list of pokemon into document and add event listeners
 
     function addELToButton(button, pokemon) {

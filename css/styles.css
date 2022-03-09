@@ -51,6 +51,31 @@ header h1 {
   flex-grow: 1;
 }
 
+/* Creates a hamburger menu button that is only there when the screen
+gets less wide than 701px */
+
+header .hamburger-menu {
+  flex-grow: 0;
+  display: none;
+  border: none;
+  background-color: #000000;
+  transition: background-color 0.4s;
+}
+
+header .hamburger-menu:hover {
+  background-color: #555555;
+}
+
+/* This creates the hamburger icon. */
+
+.hamburger-menu div {
+  height: 7px;
+  width: 50px;
+  border-radius: 20%;
+  background-color: #ffffff;
+  margin: 8px 0;
+}
+
 .pokemon-list {
   list-style: none;
   margin: auto;
@@ -172,4 +197,19 @@ div.category {
   }
 }
 
+@media screen and (max-width: 700px) {
+
+  header .hamburger-menu {
+    display: inline;
+  }
+
+  .pokemon-list {
+    display: none;
+    position: fixed;
+    top: 4rem;
+  }
+
+  .pokemon-list.present {
+    display: block;
+  }
 }
