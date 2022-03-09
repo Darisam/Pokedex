@@ -183,3 +183,16 @@ const pokemonRepository = (function() {
   }
 
   pokemonRepository.getAll().forEach(pokemonWrite);
+      function writeListItem(pokemon) {
+        const list = document.querySelector('.pokemon-list');
+        const listItem = document.createElement('li');
+        const pokemonButton = document.createElement('button');
+        pokemonButton.classList.add('pokemon-list__item');
+        pokemonButton.classList.add(pokemon.name);
+        addELToButton(pokemonButton, pokemon);
+        listItem.appendChild(pokemonButton);
+        list.appendChild(listItem);
+        pokemonButton.innerText = pokemon.name;
+      }
+
+      pokemonRepository.getAll().forEach(writeListItem);
