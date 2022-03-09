@@ -3,8 +3,8 @@
 of length and content. */
 
 function arrayCompare(array1, array2) {
-  if (Array.isArray(array1) === false ||
-  Array.isArray(array2) === false ||
+  if (Array.isArray(array1) !== true ||
+  Array.isArray(array2) !== true ||
   array1.length !== array2.length) {
     return false;
   }
