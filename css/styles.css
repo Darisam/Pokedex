@@ -27,6 +27,8 @@ header {
   border: 1px solid white;
 }
 
+button:hover {
+  cursor: pointer;
 }
 
 h1 {
