@@ -71,7 +71,6 @@ const pokemonRepository = (function() {
     };
   })();
 
-  // Adding some raw data to the repository so we have something to work with.
   /* Adding some raw data to the repository so we have something to work with,
   plus a whole lot of dummys to check the layout of the list */
 

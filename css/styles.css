@@ -8,8 +8,6 @@ html {
   font-family: Arial, sans-serif;
 }
 
-.main-content {
-  max-width: 60rem;
 body {
   font-size: 1.125rem;
 }
@@ -39,7 +37,6 @@ button:hover {
 }
 
 h1 {
-  font-size: 2rem;
   font-size: 1.5rem;
   text-align: center;
 }
@@ -81,7 +78,6 @@ header .hamburger-menu:hover {
 
 .pokemon-list {
   list-style: none;
-  margin: auto;
   width: 16rem;
   height: calc(100vh - 4rem);
   overflow-y: auto;
