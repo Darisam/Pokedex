@@ -151,7 +151,6 @@ const pokemonRepository = (function() {
     }
   );
 
-  // Html output section
   function createDummy() {
     return {
       name: 'Dummy',
@@ -170,23 +169,11 @@ const pokemonRepository = (function() {
       }
     }
 
-  /* This function assembles a big template literal consisting of first the name
-  of the Pokemon, second its height, and third a comment if it is bigger than
-  70''. Last the template is enclosed in <li> tags and written into index.html. */
     for (let i = 0; i < 40; i++) {
       pokemonRepository.add(createDummy());
     }
 
-  function pokemonWrite(pokemon) {
-    document.write( `<li class="pokemon-list__item">
-    ${pokemon.name}
-    (height: ${ heightInFeet( pokemon.height ).feet }'
-    ${ heightInFeet( pokemon.height ).inches }'')
-    ${(pokemon.height > 70 ? '- Wow, that\'s big!' : '')}
-    </li>` );
-  }
 
-  pokemonRepository.getAll().forEach(pokemonWrite);
     // Html output section
 
     // Create the functionality of the hamburger menu
