@@ -3,8 +3,8 @@
 of length and content. */
 
 function arrayCompare(array1, array2) {
-  if (Array.isArray(array1) === false ||
-  Array.isArray(array2) === false ||
+  if (Array.isArray(array1) !== true ||
+  Array.isArray(array2) !== true ||
   array1.length !== array2.length) {
     return false;
   }
@@ -29,7 +29,7 @@ const pokemonRepository = (function() {
 
   const pokemonList = [];
   const keyTemplate =
-  ["name", "category", "height", "weight", "type", "weakness", "stats"];
+  ['name', 'category', 'height', 'weight', 'type', 'weakness', 'stats'];
 
   /* The JSON methods are in the function to make sure it returns a completely
   new list of completely new objects of completely new... etc. This way the
@@ -54,9 +54,11 @@ const pokemonRepository = (function() {
       else console.log('pokemonRepository.add: Type of item is not object.');
     }
 
-    // This function acts as a test function in the getByName function. 
+    // This function acts as a test function in the getByName function.
 
-    function checkName(pokemon) {return pokemon.name === this.toString();}
+    function checkName(pokemon) {
+      return pokemon.name.toUpperCase() === this.toString().toUpperCase();
+    }
 
     function getByName(name) {
       return JSON.parse(JSON.stringify(pokemonList.filter(checkName, name)));
@@ -69,7 +71,8 @@ const pokemonRepository = (function() {
     };
   })();
 
-  // Adding some raw data to the repository so we have something to work with.
+  /* Adding some raw data to the repository so we have something to work with,
+  plus a whole lot of dummys to check the layout of the list */
 
   pokemonRepository.add(
     {
@@ -147,19 +150,62 @@ const pokemonRepository = (function() {
     }
   );
 
-  // Html output section
+  function createDummy() {
+    return {
+      name: 'Dummy',
+      category: '',
+      height: 0,
+      weight: 0,
+      type: [],
+      weakness: [],
+      stats: {
+        hp: 0,
+        attack: 0,
+        defense: 0,
+        specialAttack: 0,
+        specialDefense: 0,
+        speed: 0}
+      }
+    }
 
-  /* This function assembles a big template literal consisting of first the name
-  of the Pokemon, second its height, and third a comment if it is bigger than
-  70''. Last the template is enclosed in <li> tags and written into index.html. */
+    for (let i = 0; i < 40; i++) {
+      pokemonRepository.add(createDummy());
+    }
 
-  function pokemonWrite(pokemon) {
-    document.write( `<li class="pokemon-list__item">
-    ${pokemon.name}
-    (height: ${ heightInFeet( pokemon.height ).feet }'
-    ${ heightInFeet( pokemon.height ).inches }'')
-    ${(pokemon.height > 70 ? '- Wow, that\'s big!' : '')}
-    </li>` );
-  }
 
-  pokemonRepository.getAll().forEach(pokemonWrite);
+    // Html output section
+
+    // Create the functionality of the hamburger menu
+
+    const menuButton = document.querySelector('.hamburger-menu');
+    const menuList = document.querySelector('.pokemon-list');
+
+    menuButton.addEventListener('click', function() {
+      menuList.classList.toggle('present');
+    })
+
+    function showDetails(pokemon) {
+      console.log(pokemon.name);
+      menuList.classList.remove('present');
+    }
+
+    // Write the list of pokemon into document and add event listeners
+
+    function addELToButton(button, pokemon) {
+      button.addEventListener('click', function() {
+        showDetails(pokemon);})
+      }
+
+      function writeListItem(pokemon) {
+        const list = document.querySelector('.pokemon-list');
+        const listItem = document.createElement('li');
+        const pokemonButton = document.createElement('button');
+        pokemonButton.classList.add('pokemon-list__item');
+        pokemonButton.classList.add(pokemon.name);
+        addELToButton(pokemonButton, pokemon);
+        listItem.appendChild(pokemonButton);
+        list.appendChild(listItem);
+        pokemonButton.innerText = pokemon.name;
+      }
+
+      pokemonRepository.getAll().forEach(writeListItem);
