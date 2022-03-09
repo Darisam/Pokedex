@@ -148,10 +148,30 @@ const pokemonRepository = (function() {
   );
 
   // Html output section
+  function createDummy() {
+    return {
+      name: 'Dummy',
+      category: '',
+      height: 0,
+      weight: 0,
+      type: [],
+      weakness: [],
+      stats: {
+        hp: 0,
+        attack: 0,
+        defense: 0,
+        specialAttack: 0,
+        specialDefense: 0,
+        speed: 0}
+      }
+    }
 
   /* This function assembles a big template literal consisting of first the name
   of the Pokemon, second its height, and third a comment if it is bigger than
   70''. Last the template is enclosed in <li> tags and written into index.html. */
+    for (let i = 0; i < 40; i++) {
+      pokemonRepository.add(createDummy());
+    }
 
   function pokemonWrite(pokemon) {
     document.write( `<li class="pokemon-list__item">
