@@ -29,7 +29,7 @@ const pokemonRepository = (function() {
 
   const pokemonList = [];
   const keyTemplate =
-  ["name", "category", "height", "weight", "type", "weakness", "stats"];
+  ['name', 'category', 'height', 'weight', 'type', 'weakness', 'stats'];
 
   /* The JSON methods are in the function to make sure it returns a completely
   new list of completely new objects of completely new... etc. This way the
