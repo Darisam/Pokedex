@@ -183,6 +183,13 @@ const pokemonRepository = (function() {
   }
 
   pokemonRepository.getAll().forEach(pokemonWrite);
+    // Write the list of pokemon into document and add event listeners
+
+    function addELToButton(button, pokemon) {
+      button.addEventListener('click', function() {
+        showDetails(pokemon);})
+      }
+
       function writeListItem(pokemon) {
         const list = document.querySelector('.pokemon-list');
         const listItem = document.createElement('li');
