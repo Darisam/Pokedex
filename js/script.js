@@ -26,52 +26,18 @@ const pokemonRepository = (function() {
     return JSON.parse(JSON.stringify(pokemonList));
   }
 
-    // This function acts as a test function in the getByName function.
-
-    function checkName(pokemon) {
-      return pokemon.name.toUpperCase() === this.toString().toUpperCase();
-    }
-
-    function getByName(name) {
-      return JSON.parse(JSON.stringify(pokemonList.filter(checkName, name)));
-    }
-
-    return {
-      getAll: getAll,
-      getByName: getByName,
-      add: add
-    };
-  })();
-    // Html output section
-
-    // Create the functionality of the hamburger menu
-
-    const menuButton = document.querySelector('.hamburger-menu');
-    const menuList = document.querySelector('.pokemon-list');
-
-    menuButton.addEventListener('click', function() {
-      menuList.classList.toggle('present');
-    })
-    // Write the list of pokemon into document and add event listeners
-
-    function addELToButton(button, pokemon) {
-      button.addEventListener('click', function() {
-        showDetails(pokemon);})
-      }
-
-      function writeListItem(pokemon) {
-        const list = document.querySelector('.pokemon-list');
-        const listItem = document.createElement('li');
-        const pokemonButton = document.createElement('button');
-        pokemonButton.classList.add('pokemon-list__item');
-        pokemonButton.classList.add(pokemon.name);
-        addELToButton(pokemonButton, pokemon);
-        listItem.appendChild(pokemonButton);
-        list.appendChild(listItem);
-        pokemonButton.innerText = pokemon.name;
-      }
   function add(pokemon) {pokemonList.push(pokemon);}
 
+
+  // This function acts as a test function in the getByName function.
+
+  function checkName(pokemon) {
+    return pokemon.name.toUpperCase() === this.toString().toUpperCase();
+  }
+
+  function getByName(name) {
+    return JSON.parse(JSON.stringify(pokemonList.filter(checkName, name)));
+  }
 
   function loadList() {
     return fetch(apiUrl).then( function(response) {
@@ -101,8 +67,27 @@ const pokemonRepository = (function() {
     });
   }
 
+  return {
+    getAll: getAll,
+    getByName: getByName,
+    add: add,
     loadList: loadList,
     loadDetails: loadDetails
+  };
+})();
+
+
+
+// Html output section
+
+// Create the functionality of the hamburger menu
+
+const menuButton = document.querySelector('.hamburger-menu');
+const menuList = document.querySelector('.pokemon-list');
+
+menuButton.addEventListener('click', function() {
+  menuList.classList.toggle('present');
+})
 
 // Show details of the a clicked pokemon
 
@@ -113,6 +98,24 @@ function showDetails(pokemon) {
   });
 }
 
+// Write the list of pokemon into document and add event listeners
+
+function addELToButton(button, pokemon) {
+  button.addEventListener('click', function() {
+    showDetails(pokemon);})
+  }
+
+  function writeListItem(pokemon) {
+    const list = document.querySelector('.pokemon-list');
+    const listItem = document.createElement('li');
+    const pokemonButton = document.createElement('button');
+    pokemonButton.classList.add('pokemon-list__item');
+    pokemonButton.classList.add(pokemon.name);
+    addELToButton(pokemonButton, pokemon);
+    listItem.appendChild(pokemonButton);
+    list.appendChild(listItem);
+    pokemonButton.innerText = pokemon.name;
+  }
 
   pokemonRepository.loadList().then( function() {
     pokemonRepository.getAll().forEach(writeListItem)
