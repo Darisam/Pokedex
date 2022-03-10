@@ -52,12 +52,6 @@ const pokemonRepository = (function() {
     menuButton.addEventListener('click', function() {
       menuList.classList.toggle('present');
     })
-
-    function showDetails(pokemon) {
-      console.log(pokemon.name);
-      menuList.classList.remove('present');
-    }
-
     // Write the list of pokemon into document and add event listeners
 
     function addELToButton(button, pokemon) {
@@ -111,3 +105,13 @@ const pokemonRepository = (function() {
 
     loadList: loadList,
     loadDetails: loadDetails
+
+// Show details of the a clicked pokemon
+
+function showDetails(pokemon) {
+  menuList.classList.remove('present');
+  pokemonRepository.loadDetails(pokemon).then( function() {
+    console.log(pokemon);
+  });
+}
+
