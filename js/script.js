@@ -1,19 +1,6 @@
 
-/* This function tests whether two arrays are the same in terms
-of length and content. */
-
-function arrayCompare(array1, array2) {
-  if (Array.isArray(array1) !== true ||
-  Array.isArray(array2) !== true ||
-  array1.length !== array2.length) {
-    return false;
-  }
-  for (let i = 0; i < array1.length; i++) {
-    if (array1[i] !== array2[i]) {
-      return false;
-    }
-  }
-  return true;
+function capitalizeFirst(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 function heightInFeet(heightInInches) {
@@ -28,8 +15,8 @@ function heightInFeet(heightInInches) {
 const pokemonRepository = (function() {
 
   const pokemonList = [];
-  const keyTemplate =
-  ['name', 'category', 'height', 'weight', 'type', 'weakness', 'stats'];
+  const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+
 
   /* The JSON methods are in the function to make sure it returns a completely
   new list of completely new objects of completely new... etc. This way the
@@ -39,173 +26,97 @@ const pokemonRepository = (function() {
     return JSON.parse(JSON.stringify(pokemonList));
   }
 
-  function add(pokemon) {
-    if (typeof pokemon === 'object') {
-      if (arrayCompare(keyTemplate, Object.keys(pokemon)) === true) {
-        pokemonList.push(pokemon);
-      }
-      else {
-        console.log(pokemon.name === undefined ?
-          'pokemonRepository.add: Item is not a proper object or lacks a name key.'
-          : 'pokemonRepository.add: ' + pokemon.name +
-          ' is not a properly formated pokemon.' );
-        }
-      }
-      else console.log('pokemonRepository.add: Type of item is not object.');
-    }
-
-    // This function acts as a test function in the getByName function.
-
-    function checkName(pokemon) {
-      return pokemon.name.toUpperCase() === this.toString().toUpperCase();
-    }
-
-    function getByName(name) {
-      return JSON.parse(JSON.stringify(pokemonList.filter(checkName, name)));
-    }
-
-    return {
-      getAll: getAll,
-      getByName: getByName,
-      add: add
-    };
-  })();
-
-  /* Adding some raw data to the repository so we have something to work with,
-  plus a whole lot of dummys to check the layout of the list */
-
-  pokemonRepository.add(
-    {
-      name: 'Bulbasaur',
-      category: 'Seed',
-      height: 28,
-      weight: 15.2,
-      type: ['Grass', 'Poison'],
-      weakness: ['Fire', 'Psychic', 'Flying', 'Ice'],
-      stats: {
-        hp: 3,
-        attack: 3,
-        defense: 3,
-        specialAttack: 4,
-        specialDefense: 4,
-        speed: 3
-      }
-    }
-  );
-
-  pokemonRepository.add(
-    {
-      name: 'Ivysaur',
-      category: 'Seed',
-      height: 39,
-      weight: 28.7,
-      type: ['Grass', 'Poison'],
-      weakness: ['Fire', 'Psychic', 'Flying', 'Ice'],
-      stats: {
-        hp: 4,
-        attack: 4,
-        defense: 4,
-        specialAttack: 5,
-        specialDefense: 5,
-        speed: 4
-      }
-    }
-  );
-
-  pokemonRepository.add(
-    {
-      name: 'Venusaur',
-      category: 'Seed',
-      height: 79,
-      weight: 220.5,
-      type: ['Grass', 'Poison'],
-      weakness: ['Fire', 'Psychic', 'Flying', 'Ice'],
-      stats: {
-        hp: 5,
-        attack: 5,
-        defense: 5,
-        specialAttack: 6,
-        specialDefense: 6,
-        speed: 5
-      }
-    }
-  );
-
-  pokemonRepository.add(
-    {
-      name: 'Charmander',
-      category: 'Lizard',
-      height: 24,
-      weight: 18.7,
-      type: ['Fire'],
-      weakness: ['Water', 'Ground', 'Rock'],
-      stats: {
-        hp: 3,
-        attack: 4,
-        defense: 3,
-        specialAttack: 4,
-        specialDefense: 3,
-        speed: 4
-      }
-    }
-  );
-
-  function createDummy() {
-    return {
-      name: 'Dummy',
-      category: '',
-      height: 0,
-      weight: 0,
-      type: [],
-      weakness: [],
-      stats: {
-        hp: 0,
-        attack: 0,
-        defense: 0,
-        specialAttack: 0,
-        specialDefense: 0,
-        speed: 0}
-      }
-    }
-
-    for (let i = 0; i < 40; i++) {
-      pokemonRepository.add(createDummy());
-    }
+  function add(pokemon) {pokemonList.push(pokemon);}
 
 
-    // Html output section
+  // This function acts as a test function in the getByName function.
 
-    // Create the functionality of the hamburger menu
+  function checkName(pokemon) {
+    return pokemon.name.toUpperCase() === this.toString().toUpperCase();
+  }
 
-    const menuButton = document.querySelector('.hamburger-menu');
-    const menuList = document.querySelector('.pokemon-list');
+  function getByName(name) {
+    return JSON.parse(JSON.stringify(pokemonList.filter(checkName, name)));
+  }
 
-    menuButton.addEventListener('click', function() {
-      menuList.classList.toggle('present');
-    })
+  function loadList() {
+    return fetch(apiUrl).then( function(response) {
+      return response.json();
+    }).then( function(json) {
+      json.results.forEach( function(item) {
+        let pokemon = {
+          name: capitalizeFirst(item.name),
+          detailsUrl: item.url
+        };
+        add(pokemon);
+      });
+    }).catch( function(error) {
+      console.error(error);
+    });
+  }
 
-    function showDetails(pokemon) {
-      console.log(pokemon.name);
-      menuList.classList.remove('present');
-    }
+  function loadDetails(pokemon) {
+    return fetch(pokemon.detailsUrl). then( function(response) {
+      return response.json();
+    }).then( function(details) {
+      pokemon.imageUrl = details.sprites.front_default;
+      pokemon.height = details.height;
+      pokemon.types = details.types;
+    }).catch( function(error) {
+      console.error(error);
+    });
+  }
 
-    // Write the list of pokemon into document and add event listeners
+  return {
+    getAll: getAll,
+    getByName: getByName,
+    add: add,
+    loadList: loadList,
+    loadDetails: loadDetails
+  };
+})();
 
-    function addELToButton(button, pokemon) {
-      button.addEventListener('click', function() {
-        showDetails(pokemon);})
-      }
 
-      function writeListItem(pokemon) {
-        const list = document.querySelector('.pokemon-list');
-        const listItem = document.createElement('li');
-        const pokemonButton = document.createElement('button');
-        pokemonButton.classList.add('pokemon-list__item');
-        pokemonButton.classList.add(pokemon.name);
-        addELToButton(pokemonButton, pokemon);
-        listItem.appendChild(pokemonButton);
-        list.appendChild(listItem);
-        pokemonButton.innerText = pokemon.name;
-      }
 
-      pokemonRepository.getAll().forEach(writeListItem);
+// Html output section
+
+// Create the functionality of the hamburger menu
+
+const menuButton = document.querySelector('.hamburger-menu');
+const menuList = document.querySelector('.pokemon-list');
+
+menuButton.addEventListener('click', function() {
+  menuList.classList.toggle('present');
+})
+
+// Show details of the a clicked pokemon
+
+function showDetails(pokemon) {
+  menuList.classList.remove('present');
+  pokemonRepository.loadDetails(pokemon).then( function() {
+    console.log(pokemon);
+  });
+}
+
+// Write the list of pokemon into document and add event listeners
+
+function addELToButton(button, pokemon) {
+  button.addEventListener('click', function() {
+    showDetails(pokemon);})
+  }
+
+  function writeListItem(pokemon) {
+    const list = document.querySelector('.pokemon-list');
+    const listItem = document.createElement('li');
+    const pokemonButton = document.createElement('button');
+    pokemonButton.classList.add('pokemon-list__item');
+    pokemonButton.classList.add(pokemon.name);
+    addELToButton(pokemonButton, pokemon);
+    listItem.appendChild(pokemonButton);
+    list.appendChild(listItem);
+    pokemonButton.innerText = pokemon.name;
+  }
+
+  pokemonRepository.loadList().then( function() {
+    pokemonRepository.getAll().forEach(writeListItem)
+  });
