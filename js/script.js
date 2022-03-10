@@ -14,6 +14,8 @@ function arrayCompare(array1, array2) {
     }
   }
   return true;
+function capitalizeFirst(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 function heightInFeet(heightInInches) {
@@ -30,6 +32,8 @@ const pokemonRepository = (function() {
   const pokemonList = [];
   const keyTemplate =
   ['name', 'category', 'height', 'weight', 'type', 'weakness', 'stats'];
+  const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+
 
   /* The JSON methods are in the function to make sure it returns a completely
   new list of completely new objects of completely new... etc. This way the
@@ -209,3 +213,36 @@ const pokemonRepository = (function() {
       }
 
       pokemonRepository.getAll().forEach(writeListItem);
+  function add(pokemon) {pokemonList.push(pokemon);}
+
+
+  function loadList() {
+    return fetch(apiUrl).then( function(response) {
+      return response.json();
+    }).then( function(json) {
+      json.results.forEach( function(item) {
+        let pokemon = {
+          name: capitalizeFirst(item.name),
+          detailsUrl: item.url
+        };
+        add(pokemon);
+      });
+    }).catch( function(error) {
+      console.error(error);
+    });
+  }
+
+  function loadDetails(pokemon) {
+    return fetch(pokemon.detailsUrl). then( function(response) {
+      return response.json();
+    }).then( function(details) {
+      pokemon.imageUrl = details.sprites.front_default;
+      pokemon.height = details.height;
+      pokemon.types = details.types;
+    }).catch( function(error) {
+      console.error(error);
+    });
+  }
+
+    loadList: loadList,
+    loadDetails: loadDetails
