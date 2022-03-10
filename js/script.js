@@ -70,8 +70,6 @@ const pokemonRepository = (function() {
         list.appendChild(listItem);
         pokemonButton.innerText = pokemon.name;
       }
-
-      pokemonRepository.getAll().forEach(writeListItem);
   function add(pokemon) {pokemonList.push(pokemon);}
 
 
@@ -115,3 +113,7 @@ function showDetails(pokemon) {
   });
 }
 
+
+  pokemonRepository.loadList().then( function() {
+    pokemonRepository.getAll().forEach(writeListItem)
+  });
