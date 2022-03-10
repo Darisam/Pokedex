@@ -39,6 +39,8 @@ const pokemonRepository = (function() {
     return JSON.parse(JSON.stringify(pokemonList.filter(checkName, name)));
   }
 
+  // Load the names of the pokemon from the API and write them to pokemonList
+
   function loadList() {
     return fetch(apiUrl).then( function(response) {
       return response.json();
@@ -55,6 +57,8 @@ const pokemonRepository = (function() {
     });
   }
 
+  // Loads details for a specific pokemon from the API
+
   function loadDetails(pokemon) {
     return fetch(pokemon.detailsUrl). then( function(response) {
       return response.json();
@@ -67,18 +71,7 @@ const pokemonRepository = (function() {
     });
   }
 
-  return {
-    getAll: getAll,
-    getByName: getByName,
-    add: add,
-    loadList: loadList,
-    loadDetails: loadDetails
-  };
-})();
-
-
-
-// Html output section
+  // Write Pokemon list into the html document and add Event Listeners
 
 // Create the functionality of the hamburger menu
 
@@ -88,35 +81,46 @@ const menuList = document.querySelector('.pokemon-list');
 menuButton.addEventListener('click', function() {
   menuList.classList.toggle('present');
 })
+  function addELToButton(button, pokemon) {
+    button.addEventListener('click', function() {
+      showDetails(pokemon);
       menuList.classList.remove('present');})
+    }
 
-// Show details of the a clicked pokemon
+    function addListItem(pokemon) {
+      const list = document.querySelector('.pokemon-list');
+      const listItem = document.createElement('li');
+      const pokemonButton = document.createElement('button');
+      pokemonButton.classList.add('pokemon-list__item');
+      pokemonButton.classList.add(pokemon.name);
+      addELToButton(pokemonButton, pokemon);
+      listItem.appendChild(pokemonButton);
+      list.appendChild(listItem);
+      pokemonButton.innerText = pokemon.name;
+    }
 
-function showDetails(pokemon) {
-  pokemonRepository.loadDetails(pokemon).then( function() {
-    console.log(pokemon);
-  });
-}
+    // Show details of the a clicked pokemon
 
-// Write the list of pokemon into document and add event listeners
+    function showDetails(pokemon) {
+      loadDetails(pokemon).then( function() {
+        console.log(pokemon);
+      });
+    }
 
-function addELToButton(button, pokemon) {
-  button.addEventListener('click', function() {
-    showDetails(pokemon);})
-  }
+    return {
+      getAll: getAll,
+      getByName: getByName,
+      add: add,
+      loadList: loadList,
+      loadDetails: loadDetails,
+      addListItem: addListItem
+    };
+  })();
 
-  function writeListItem(pokemon) {
-    const list = document.querySelector('.pokemon-list');
-    const listItem = document.createElement('li');
-    const pokemonButton = document.createElement('button');
-    pokemonButton.classList.add('pokemon-list__item');
-    pokemonButton.classList.add(pokemon.name);
-    addELToButton(pokemonButton, pokemon);
-    listItem.appendChild(pokemonButton);
-    list.appendChild(listItem);
-    pokemonButton.innerText = pokemon.name;
-  }
+
+
+
 
   pokemonRepository.loadList().then( function() {
-    pokemonRepository.getAll().forEach(writeListItem)
+    pokemonRepository.getAll().forEach(pokemonRepository.addListItem)
   });
