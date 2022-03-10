@@ -1,4 +1,7 @@
 
+// Some functions that will be helpful later. (Well, okay, the heightInFeet
+// function is not used at the moment.)
+
 function capitalizeFirst(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
