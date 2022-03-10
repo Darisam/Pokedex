@@ -88,11 +88,11 @@ const menuList = document.querySelector('.pokemon-list');
 menuButton.addEventListener('click', function() {
   menuList.classList.toggle('present');
 })
+      menuList.classList.remove('present');})
 
 // Show details of the a clicked pokemon
 
 function showDetails(pokemon) {
-  menuList.classList.remove('present');
   pokemonRepository.loadDetails(pokemon).then( function() {
     console.log(pokemon);
   });
