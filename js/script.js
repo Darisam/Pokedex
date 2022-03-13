@@ -99,6 +99,15 @@ const pokemonRepository = (function() {
         console.log(pokemon);
       });
     }
+  // Show details of the a clicked pokemon and add methods to close the window
+  // showing the pokemon.
+
+  function showDetails(pokemon) {
+    pokemonPicture.setAttribute('src', 'img/No_Image.svg');
+    pokemonRepository.loadDetails(pokemon).then( function() {
+      const pokemonHeading = modalContainer.querySelector('.modal h1');
+      const pokemonDescription = modalContainer.querySelector('.modal p');
+      const closeModalButton = modalContainer.querySelector('.modal button');
 
     return {
       getAll: getAll,
@@ -109,9 +118,28 @@ const pokemonRepository = (function() {
       addListItem: addListItem
     };
   })();
+      pokemonPicture.setAttribute('src', pokemon.imageUrl);
+      pokemonPicture.setAttribute('alt', 'Picture of ' + pokemon.name);
+      pokemonHeading.innerText = pokemon.name;
+      pokemonDescription.innerText = 'Height: ' + pokemon.height / 10 + 'm';
+      modalContainer.classList.add('modal-container-present');
 
   // Html output section
+      function hideDetails() {
+        modalContainer.classList.remove('modal-container-present');
+      }
 
+      closeModalButton.addEventListener('click', hideDetails);
+
+      modalContainer.addEventListener('click', function(e) {
+        if (e.target === modalContainer) { hideDetails(); }
+      });
+
+      window.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { hideDetails(); }
+      });
+    });
+  }
 
 
 
