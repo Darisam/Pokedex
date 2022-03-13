@@ -74,23 +74,44 @@ const pokemonRepository = (function() {
     });
   }
 
+
+  return {
+    getAll: getAll,
+    getByName: getByName,
+    add: add,
+    loadList: loadList,
+    loadDetails: loadDetails
+  };
+})();
+
+
+// Create an IIFE that handles the Html output.
+
+const documentOutput = ( function() {
+
+  const modalContainer = document.querySelector('.modal-container');
+  const modal = modalContainer.querySelector('.modal');
+  const pokemonPicture = modal.querySelector('img');
+
   // Write Pokemon list into the html document and add Event Listeners
 
   function addELToButton(button, pokemon) {
     button.addEventListener('click', function() {
       showDetails(pokemon);
+    });
+  }
 
-    function addListItem(pokemon) {
-      const list = document.querySelector('.pokemon-list');
-      const listItem = document.createElement('li');
-      const pokemonButton = document.createElement('button');
-      pokemonButton.classList.add('pokemon-list__item');
-      pokemonButton.classList.add(pokemon.name);
-      addELToButton(pokemonButton, pokemon);
-      listItem.appendChild(pokemonButton);
-      list.appendChild(listItem);
-      pokemonButton.innerText = pokemon.name;
-    }
+  function writeListItem(pokemon) {
+    const list = document.querySelector('.pokemon-list');
+    const listItem = document.createElement('li');
+    const pokemonButton = document.createElement('button');
+    pokemonButton.classList.add('pokemon-list__item');
+    pokemonButton.classList.add(pokemon.name);
+    addELToButton(pokemonButton, pokemon);
+    listItem.appendChild(pokemonButton);
+    list.appendChild(listItem);
+    pokemonButton.innerText = pokemon.name;
+  }
 
     // Show details of the a clicked pokemon
 
@@ -109,22 +130,12 @@ const pokemonRepository = (function() {
       const pokemonDescription = modalContainer.querySelector('.modal p');
       const closeModalButton = modalContainer.querySelector('.modal button');
 
-    return {
-      getAll: getAll,
-      getByName: getByName,
-      add: add,
-      loadList: loadList,
-      loadDetails: loadDetails,
-      addListItem: addListItem
-    };
-  })();
       pokemonPicture.setAttribute('src', pokemon.imageUrl);
       pokemonPicture.setAttribute('alt', 'Picture of ' + pokemon.name);
       pokemonHeading.innerText = pokemon.name;
       pokemonDescription.innerText = 'Height: ' + pokemon.height / 10 + 'm';
       modalContainer.classList.add('modal-container-present');
 
-  // Html output section
       function hideDetails() {
         modalContainer.classList.remove('modal-container-present');
       }
@@ -141,7 +152,11 @@ const pokemonRepository = (function() {
     });
   }
 
+  return {
+    writeListItem: writeListItem
+  };
 
+})();
 
   pokemonRepository.loadList().then( function() {
     pokemonRepository.getAll().forEach(pokemonRepository.addListItem)
