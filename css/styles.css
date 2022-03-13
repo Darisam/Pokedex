@@ -40,9 +40,7 @@ h1 {
   text-align: center;
 }
 
-header {
-  background-color: #000000;
-}
+header { background-color: #ee0000; }
 
 header h1 {
   display: inline;
