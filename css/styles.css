@@ -15,7 +15,6 @@ main {
   top: 4rem;
   max-width: 80rem;
   display: grid;
-  grid-template-columns: auto auto;
   column-gap: 1rem;
   border: 1px solid white;
 }
@@ -32,6 +31,8 @@ header {
 
 button:hover {
   cursor: pointer;
+  width: 100%;
+  grid-template-columns: auto 1fr;
 }
 
 h1 {
