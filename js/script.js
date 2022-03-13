@@ -7,7 +7,7 @@ function capitalizeFirst(string) {
 
 // The IIFE containing the pokemon list and associated methods.
 
-const pokemonRepository = (function() {
+const pokemonRepository = ( function() {
 
   const pokemonList = [];
   const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
