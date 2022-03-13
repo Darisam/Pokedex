@@ -26,7 +26,6 @@ header {
   text-align: center;
   height: 4rem;
   width: 100%;
-  border: 1px solid white;
 }
 
 button:hover {
@@ -56,7 +55,6 @@ header h1 {
   background-color: #ffffff;
   padding: 0;
   margin: 0;
-  border: 1px solid white;
 }
 
 .pokemon-list__item {
