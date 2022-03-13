@@ -115,12 +115,36 @@ button.modal-close:hover { text-decoration: none; }
   width: 96px;
 }
 
+@media screen and (max-width: 640px) {
 
+  main { grid-template-columns: 1fr; }
 
+  .pokemon-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+    list-style: none;
+    width: 100%;
+    height: auto;
   }
 
+  .pokemon-list__item {
+    height: 1.75em;
+    width: 9em;
+    background-color: #dddddd;
+    font-size: 1.25rem;
+    text-align: center;
+    padding: 0.125em 0.25em;
+    margin: 0.5em;
+    box-shadow: 4px 4px 2px #333333;
   }
 
+  .pokemon-list__item:hover {
+    border: 1px solid #222222;
+    background-color: #bbbbbb;
+    box-shadow: 6px 6px 2px #222222;
   }
 
+  .modal-container-present { position: fixed; }
 }
