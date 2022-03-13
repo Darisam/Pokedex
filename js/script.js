@@ -12,28 +12,6 @@ const pokemonRepository = ( function() {
   const pokemonList = [];
   const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
-
-  /* The JSON methods are in the function to make sure it returns a completely
-  new list of completely new objects of completely new... etc. This way the
-  received copy can't be used to modify the original pokemonList. */
-
-  function getAll() {
-    return JSON.parse(JSON.stringify(pokemonList));
-  }
-
-  function add(pokemon) {pokemonList.push(pokemon);}
-
-
-  // This function acts as a test function in the getByName function.
-
-  function checkName(pokemon) {
-    return pokemon.name.toUpperCase() === this.toString().toUpperCase();
-  }
-
-  function getByName(name) {
-    return JSON.parse(JSON.stringify(pokemonList.filter(checkName, name)));
-  }
-
   // Load the names of the pokemon from the API and write them to pokemonList
 
   function loadList() {
@@ -66,6 +44,25 @@ const pokemonRepository = ( function() {
     });
   }
 
+  /* The JSON methods are in the function to make sure it returns a completely
+  new list of completely new objects of completely new... etc. This way the
+  received copy can't be used to modify the original pokemonList. */
+
+  function add(pokemon) {pokemonList.push(pokemon);}
+
+  function getAll() {
+    return JSON.parse(JSON.stringify(pokemonList));
+  }
+
+  // This function acts as a test function in the getByName function.
+
+  function checkName(pokemon) {
+    return pokemon.name.toUpperCase() === this.toString().toUpperCase();
+  }
+
+  function getByName(name) {
+    return JSON.parse(JSON.stringify(pokemonList.filter(checkName, name)));
+  }
 
   return {
     getAll: getAll,
