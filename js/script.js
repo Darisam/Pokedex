@@ -1,16 +1,8 @@
 
-// Some functions that will be helpful later. (Well, okay, the heightInFeet
-// function is not used at the moment.)
+// Some functions that will be helpful later.
 
 function capitalizeFirst(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-function heightInFeet(heightInInches) {
-  return {
-    feet: Math.floor(heightInInches / 12),
-    inches: heightInInches % 12
-  };
 }
 
 // The IIFE containing the pokemon list and associated methods.
