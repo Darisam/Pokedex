@@ -1,46 +1,16 @@
 
-// Some functions that will be helpful later. (Well, okay, the heightInFeet
-// function is not used at the moment.)
+// Some functions that will be helpful later.
 
 function capitalizeFirst(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-function heightInFeet(heightInInches) {
-  return {
-    feet: Math.floor(heightInInches / 12),
-    inches: heightInInches % 12
-  };
-}
-
 // The IIFE containing the pokemon list and associated methods.
 
-const pokemonRepository = (function() {
+const pokemonRepository = ( function() {
 
   const pokemonList = [];
   const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
-
-
-  /* The JSON methods are in the function to make sure it returns a completely
-  new list of completely new objects of completely new... etc. This way the
-  received copy can't be used to modify the original pokemonList. */
-
-  function getAll() {
-    return JSON.parse(JSON.stringify(pokemonList));
-  }
-
-  function add(pokemon) {pokemonList.push(pokemon);}
-
-
-  // This function acts as a test function in the getByName function.
-
-  function checkName(pokemon) {
-    return pokemon.name.toUpperCase() === this.toString().toUpperCase();
-  }
-
-  function getByName(name) {
-    return JSON.parse(JSON.stringify(pokemonList.filter(checkName, name)));
-  }
 
   // Load the names of the pokemon from the API and write them to pokemonList
 
@@ -74,55 +44,102 @@ const pokemonRepository = (function() {
     });
   }
 
+  /* The JSON methods are in the function to make sure it returns a completely
+  new list of completely new objects of completely new... etc. This way the
+  received copy can't be used to modify the original pokemonList. */
+
+  function add(pokemon) {pokemonList.push(pokemon);}
+
+  function getAll() {
+    return JSON.parse(JSON.stringify(pokemonList));
+  }
+
+  // This function acts as a test function in the getByName function.
+
+  function checkName(pokemon) {
+    return pokemon.name.toUpperCase() === this.toString().toUpperCase();
+  }
+
+  function getByName(name) {
+    return JSON.parse(JSON.stringify(pokemonList.filter(checkName, name)));
+  }
+
+  return {
+    getAll: getAll,
+    getByName: getByName,
+    add: add,
+    loadList: loadList,
+    loadDetails: loadDetails
+  };
+})();
+
+
+// Create an IIFE that handles the Html output.
+
+const documentOutput = ( function() {
+
+  const modalContainer = document.querySelector('.modal-container');
+  const modal = modalContainer.querySelector('.modal');
+  const pokemonPicture = modal.querySelector('img');
+
   // Write Pokemon list into the html document and add Event Listeners
 
   function addELToButton(button, pokemon) {
     button.addEventListener('click', function() {
       showDetails(pokemon);
-      menuList.classList.remove('present');})
-    }
+    });
+  }
 
-    function addListItem(pokemon) {
-      const list = document.querySelector('.pokemon-list');
-      const listItem = document.createElement('li');
-      const pokemonButton = document.createElement('button');
-      pokemonButton.classList.add('pokemon-list__item');
-      pokemonButton.classList.add(pokemon.name);
-      addELToButton(pokemonButton, pokemon);
-      listItem.appendChild(pokemonButton);
-      list.appendChild(listItem);
-      pokemonButton.innerText = pokemon.name;
-    }
+  function writeListItem(pokemon) {
+    const list = document.querySelector('.pokemon-list');
+    const listItem = document.createElement('li');
+    const pokemonButton = document.createElement('button');
+    pokemonButton.classList.add('pokemon-list__item');
+    pokemonButton.classList.add(pokemon.name);
+    addELToButton(pokemonButton, pokemon);
+    listItem.appendChild(pokemonButton);
+    list.appendChild(listItem);
+    pokemonButton.innerText = pokemon.name;
+  }
 
-    // Show details of the a clicked pokemon
+  // Show details of the a clicked pokemon and add methods to close the window
+  // showing the pokemon.
 
-    function showDetails(pokemon) {
-      loadDetails(pokemon).then( function() {
-        console.log(pokemon);
+  function showDetails(pokemon) {
+    pokemonPicture.setAttribute('src', 'img/No_Image.svg');
+    pokemonRepository.loadDetails(pokemon).then( function() {
+      const pokemonHeading = modalContainer.querySelector('.modal h1');
+      const pokemonDescription = modalContainer.querySelector('.modal p');
+      const closeModalButton = modalContainer.querySelector('.modal button');
+
+      pokemonPicture.setAttribute('src', pokemon.imageUrl);
+      pokemonPicture.setAttribute('alt', 'Picture of ' + pokemon.name);
+      pokemonHeading.innerText = pokemon.name;
+      pokemonDescription.innerText = 'Height: ' + pokemon.height / 10 + 'm';
+      modalContainer.classList.add('modal-container-present');
+
+      function hideDetails() {
+        modalContainer.classList.remove('modal-container-present');
+      }
+
+      closeModalButton.addEventListener('click', hideDetails);
+
+      modalContainer.addEventListener('click', function(e) {
+        if (e.target === modalContainer) { hideDetails(); }
       });
-    }
 
-    return {
-      getAll: getAll,
-      getByName: getByName,
-      add: add,
-      loadList: loadList,
-      loadDetails: loadDetails,
-      addListItem: addListItem
-    };
-  })();
+      window.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { hideDetails(); }
+      });
+    });
+  }
 
-  // Html output section
+  return {
+    writeListItem: writeListItem
+  };
 
-  // Create the functionality of the hamburger menu
+})();
 
-  const menuButton = document.querySelector('.hamburger-menu');
-  const menuList = document.querySelector('.pokemon-list');
-
-  menuButton.addEventListener('click', function() {
-    menuList.classList.toggle('present');
-  })
-
-  pokemonRepository.loadList().then( function() {
-    pokemonRepository.getAll().forEach(pokemonRepository.addListItem)
-  });
+pokemonRepository.loadList().then( function() {
+  pokemonRepository.getAll().forEach(documentOutput.writeListItem);
+});

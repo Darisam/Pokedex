@@ -1,5 +1,3 @@
-/* All the pointless white borders are in the sheet so I can turn them on
-with search-replace and see where exactly the boxes are. */
 
 * { box-sizing: border-box; }
 
@@ -8,19 +6,7 @@ html {
   font-family: Arial, sans-serif;
 }
 
-body {
-  font-size: 1.125rem;
-}
-
-main {
-  position: absolute;
-  top: 4rem;
-  max-width: 80rem;
-  display: grid;
-  grid-template-columns: auto auto;
-  column-gap: 1rem;
-  border: 1px solid white;
-}
+body { font-size: 1.125rem; }
 
 header {
   position: fixed;
@@ -29,51 +15,32 @@ header {
   text-align: center;
   height: 4rem;
   width: 100%;
-  border: 1px solid white;
+  max-width: 80rem;
 }
 
-button:hover {
-  cursor: pointer;
+main {
+  position: absolute;
+  width: 100%;
+  top: 4rem;
+  max-width: 80rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.5rem;
 }
+
+button:hover { cursor: pointer; }
 
 h1 {
   font-size: 1.5rem;
   text-align: center;
 }
 
-header {
-  background-color: #000000;
-}
+header { background-color: #ee0000; }
 
 header h1 {
   display: inline;
   color: #ffffff;
   flex-grow: 1;
-}
-
-/* Creates a hamburger menu button that is only there when the screen
-gets less wide than 701px */
-
-header .hamburger-menu {
-  flex-grow: 0;
-  display: none;
-  border: none;
-  background-color: #000000;
-  transition: background-color 0.4s;
-}
-
-header .hamburger-menu:hover {
-  background-color: #555555;
-}
-
-/* This creates the hamburger icon. */
-
-.hamburger-menu div {
-  height: 7px;
-  width: 50px;
-  border-radius: 20%;
-  background-color: #ffffff;
-  margin: 8px 0;
 }
 
 .pokemon-list {
@@ -84,7 +51,6 @@ header .hamburger-menu:hover {
   background-color: #ffffff;
   padding: 0;
   margin: 0;
-  border: 1px solid white;
 }
 
 .pokemon-list__item {
@@ -99,115 +65,77 @@ header .hamburger-menu:hover {
   border: 1px solid #222222;
 }
 
-.pokemon-list__item:hover {
-  border: 4px solid #222222;
+.pokemon-list__item:hover { border: 4px solid #222222; }
+
+.modal-container {
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: #aaaaaa80;
 }
 
-.pokemon-display {
-  border: 1px solid white;
-}
-
-.properties-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 1rem;
-  grid-row-gap: 1.5em;
-  border: 1px solid white;
-}
-
-.property {
-  border: 1px solid white;
-}
-
-.property__name {
-  margin: 0 0.5em;
-  padding: 0 0.5em;
-  border: 1px solid white;
-}
-
-span.property__value {
-  margin: 0.5em;
-  padding: 0 0.5em;
-  border: 1px solid white;
-}
-
-div.category {
-  grid-column: 1 / 3;
-}
-
-.type {
-  display: grid;
-  grid-template-columns: 7em calc(100% - 8em);
-  column-gap: 1em;
-  border: 1px solid white;
-}
-
-.type__name {
-  border: 1px solid white;
-}
-
-.type__value {
+.modal-container-present {
   display: flex;
-  flex-wrap: wrap;
-  align-content: baseline;
-  border: 1px solid white;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
 }
 
-.weakness {
-  display: grid;
-  grid-template-columns: 7em calc(100% - 8em);
-  column-gap: 1em;
-  border: 1px solid white;
-}
-
-.weakness__name {
-  border: 1px solid white;
-}
-
-.weakness__value {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: baseline;
-  border: 1px solid white;
-}
-
-.element {
+.modal {
+  width: 20rem;
+  background-color: #ffffff;
   text-align: center;
-  background-color: yellow;
-  border: 1px solid white;
-  margin: 0.125em;
-  padding: 0.625em;
+}
+
+button.modal-close {
+  background-color: #ffffff;
+  border: none;
+  padding: 0;
+  margin-bottom: 0.5rem;
   font-size: 1rem;
-  border-radius: 30%;
-  flex-shrink: 0;
-  flex-grow: 0;
+  color: #0000dd;
+  text-decoration: underline;
 }
 
-@media screen and (max-width: 1090px) {
+button.modal-close:hover { text-decoration: none; }
 
-  .properties-grid {
-    grid-template-columns: 1fr;
-    grid-column-gap: 0;
-  }
-
-  div.category {
-    grid-column: 1 / 2;
-  }
+.pokemon-picture {
+  display: block;
+  margin: auto;
+  height: 96px;
+  width: 96px;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 640px) {
 
-  header .hamburger-menu {
-    display: inline;
-  }
+  main { grid-template-columns: 1fr; }
 
   .pokemon-list {
-    display: none;
-    position: fixed;
-    top: 4rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+    list-style: none;
+    width: 100%;
+    height: auto;
   }
 
-  .pokemon-list.present {
-    display: block;
+  .pokemon-list__item {
+    height: 1.75em;
+    width: 9em;
+    background-color: #dddddd;
+    font-size: 1.25rem;
+    text-align: center;
+    padding: 0.125em 0.25em;
+    margin: 0.5em;
+    box-shadow: 4px 4px 2px #333333;
   }
+
+  .pokemon-list__item:hover {
+    border: 1px solid #222222;
+    background-color: #bbbbbb;
+    box-shadow: 6px 6px 2px #222222;
+  }
+
+  .modal-container-present { position: fixed; }
 }
