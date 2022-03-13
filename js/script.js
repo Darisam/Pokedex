@@ -79,8 +79,6 @@ const pokemonRepository = (function() {
   function addELToButton(button, pokemon) {
     button.addEventListener('click', function() {
       showDetails(pokemon);
-      menuList.classList.remove('present');})
-    }
 
     function addListItem(pokemon) {
       const list = document.querySelector('.pokemon-list');
@@ -114,14 +112,8 @@ const pokemonRepository = (function() {
 
   // Html output section
 
-  // Create the functionality of the hamburger menu
 
-  const menuButton = document.querySelector('.hamburger-menu');
-  const menuList = document.querySelector('.pokemon-list');
 
-  menuButton.addEventListener('click', function() {
-    menuList.classList.toggle('present');
-  })
 
   pokemonRepository.loadList().then( function() {
     pokemonRepository.getAll().forEach(pokemonRepository.addListItem)
