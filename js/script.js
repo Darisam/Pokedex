@@ -143,6 +143,6 @@ const documentOutput = ( function() {
 
 })();
 
-  pokemonRepository.loadList().then( function() {
-    pokemonRepository.getAll().forEach(pokemonRepository.addListItem)
-  });
+pokemonRepository.loadList().then( function() {
+  pokemonRepository.getAll().forEach(documentOutput.writeListItem);
+});
