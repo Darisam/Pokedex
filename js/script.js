@@ -105,13 +105,6 @@ const documentOutput = ( function() {
     pokemonButton.innerText = pokemon.name;
   }
 
-    // Show details of the a clicked pokemon
-
-    function showDetails(pokemon) {
-      loadDetails(pokemon).then( function() {
-        console.log(pokemon);
-      });
-    }
   // Show details of the a clicked pokemon and add methods to close the window
   // showing the pokemon.
 
