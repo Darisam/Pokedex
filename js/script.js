@@ -95,6 +95,10 @@ const documentOutput = ( function() {
     pokemonButton.setAttribute('data-toggle', 'modal');
     pokemonButton.setAttribute('data-target', '#pokemon-display');
     pokemonButton.classList.add('pokemon-list__item');
+    pokemonButton.classList.add('list-group-item', 'list-group-item-action');
+    pokemonButton.classList.add('border', 'border-dark', 'rounded', 'shadow-sm');
+    pokemonButton.classList.add('m-2', 'px-4', 'py-1');
+    pokemonButton.classList.add('bg-light', 'text-center');
     addELToButton(pokemonButton, pokemon);
     pokemonButton.innerText = pokemon.name;
 
