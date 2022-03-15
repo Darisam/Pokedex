@@ -90,16 +90,15 @@ const documentOutput = ( function() {
 
   function writeListItem(pokemon) {
     const list = document.querySelector('.pokemon-list');
-    const listItem = document.createElement('li');
     const pokemonButton = document.createElement('button');
 
     pokemonButton.setAttribute('data-toggle', 'modal');
     pokemonButton.setAttribute('data-target', '#pokemon-display');
     pokemonButton.classList.add('pokemon-list__item');
     addELToButton(pokemonButton, pokemon);
-    listItem.appendChild(pokemonButton);
-    list.appendChild(listItem);
     pokemonButton.innerText = pokemon.name;
+
+    list.appendChild(pokemonButton);
   }
 
   // Show details of the a clicked pokemon and add methods to close the window
