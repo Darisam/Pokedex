@@ -94,6 +94,9 @@ const documentOutput = ( function() {
     const list = document.querySelector('.pokemon-list');
     const listItem = document.createElement('li');
     const pokemonButton = document.createElement('button');
+
+    pokemonButton.setAttribute('data-toggle', 'modal');
+    pokemonButton.setAttribute('data-target', '#pokemon-display');
     pokemonButton.classList.add('pokemon-list__item');
     pokemonButton.classList.add(pokemon.name);
     addELToButton(pokemonButton, pokemon);
