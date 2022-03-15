@@ -80,7 +80,8 @@ const documentOutput = ( function() {
 
   const pokemonPicture = document.querySelector('.modal-body img');
 
-  // Write Pokemon list into the html document and add Event Listeners
+  // Write Pokemon list into the html document, add Event Listeners around
+  // style the list elements.
 
   function addELToButton(button, pokemon) {
     button.addEventListener('click', function() {
@@ -105,8 +106,7 @@ const documentOutput = ( function() {
     list.appendChild(pokemonButton);
   }
 
-  // Show details of the a clicked pokemon and add methods to close the window
-  // showing the pokemon.
+  // Show details of the a clicked pokemon.
 
   function showDetails(pokemon) {
     pokemonPicture.setAttribute('src', 'img/No_Image.svg');
