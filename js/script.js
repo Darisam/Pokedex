@@ -65,19 +65,8 @@ const pokemonRepository = ( function() {
     return JSON.parse(JSON.stringify(pokemonList));
   }
 
-  // This function acts as a test function in the getByName function.
-
-  function checkName(pokemon) {
-    return pokemon.name.toUpperCase() === this.toString().toUpperCase();
-  }
-
-  function getByName(name) {
-    return JSON.parse(JSON.stringify(pokemonList.filter(checkName, name)));
-  }
-
   return {
     getAll: getAll,
-    getByName: getByName,
     add: add,
     loadList: loadList,
     loadDetails: loadDetails
