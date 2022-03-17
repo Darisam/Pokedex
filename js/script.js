@@ -80,6 +80,8 @@ const documentOutput = ( function() {
 
   const pokemonPicture = document.querySelector('.modal-body img');
   const pokemonTypeList = document.querySelector('.modal-body .pokemon-types');
+  const pokemonHeading = document.querySelector('.modal-body h1');
+  const pokemonHeight = document.querySelector('.modal-body .pokemon-height');
 
   // Write Pokemon list into the html document, add Event Listeners around
   // style the list elements.
@@ -113,8 +115,6 @@ const documentOutput = ( function() {
     pokemonTypeList.innerHTML = '';
     pokemonPicture.setAttribute('src', 'img/No_Image.svg');
     pokemonRepository.loadDetails(pokemon).then( function() {
-      const pokemonHeading = document.querySelector('.modal-body h1');
-      const pokemonDescription = document.querySelector('.modal-body p');
       pokemonPicture.setAttribute('src', pokemon.imageUrl);
       pokemonPicture.setAttribute('alt', 'Picture of ' + pokemon.name);
       pokemonHeading.innerText = pokemon.name;
