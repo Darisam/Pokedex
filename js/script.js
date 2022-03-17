@@ -1,6 +1,3 @@
-
-// Some functions that will be helpful later.
-
 function capitalizeFirst(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
@@ -40,7 +37,7 @@ const pokemonRepository = ( function() {
     return typesNew;
   }
 
-  // Loads details for a specific pokemon from the API
+  // Loads details for a specific pokemon from the API.
 
   function loadDetails(pokemon) {
     return fetch(pokemon.detailsUrl). then( function(response) {
@@ -108,7 +105,8 @@ const documentOutput = ( function() {
     list.appendChild(pokemonButton);
   }
 
-  // Show details of the a clicked pokemon.
+  // Show name, picture and height of the a clicked pokemon and add a badge
+  // for each type.
 
   function showDetails(pokemon) {
     pokemonTypeList.innerHTML = '';
@@ -134,5 +132,7 @@ const documentOutput = ( function() {
 })();
 
 pokemonRepository.loadList().then( function() {
+// Main function call to write the list of pokemon into the document
+
   pokemonRepository.getAll().forEach(documentOutput.writeListItem);
 });
