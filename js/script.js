@@ -27,7 +27,17 @@ const pokemonRepository = ( function() {
       });
     }).catch( function(error) {
       console.error(error);
+  }
+
+  // This function replaces an array with a lot of unneeded information with
+  // one containing only the names of the types.
+
+  function extractTypeNames(typesOld) {
+    let typesNew = [];
+    typesOld.forEach(function (item) {
+      typesNew.push(item.type.name);
     });
+    return typesNew;
   }
 
   // Loads details for a specific pokemon from the API
@@ -42,6 +52,7 @@ const pokemonRepository = ( function() {
     }).catch( function(error) {
       console.error(error);
     });
+        pokemon.types = extractTypeNames(details.types);
   }
 
   /* The JSON methods are in the function to make sure it returns a completely
