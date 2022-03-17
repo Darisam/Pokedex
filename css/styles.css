@@ -7,3 +7,96 @@ button.modal-close {
   color: #ffffff;
   background-color: #5566cc;
 }
+
+/* A collection of colors used for the pokemon type badges, plus a
+text-color that provides good contrast. */
+
+.normal {
+  color: #000000;
+  background-color: #a8a77a;
+}
+
+.fire {
+  color: #000000;
+  background-color: #ee8130;
+}
+
+.water {
+  color: #000000;
+  background-color: #6390f0;
+}
+
+.electric {
+  color: #000000;
+  background-color: #f7d02c;
+}
+
+.grass {
+  color: #000000;
+  background-color: #7ac74c;
+}
+
+.ice {
+  color: #000000;
+  background-color: #96d9d6;
+}
+
+.fighting {
+  color: #ffffff;
+  background-color: #c22e28;
+}
+
+.poison {
+  color: #ffffff;
+  background-color: #a33ea1;
+}
+
+.ground {
+  color: #000000;
+  background-color: #e2bf65;
+}
+
+.flying {
+  color: #000000;
+  background-color: #a98ff3;
+}
+
+.psychic {
+  color: #000000;
+  background-color: #f95587;
+}
+
+.bug {
+  color: #000000;
+  background-color: #a6b91a;
+}
+
+.rock {
+  color: #000000;
+  background-color: #b6a136;
+}
+
+.ghost {
+  color: #ffffff;
+  background-color: #735797;
+}
+
+.dragon {
+  color: #ffffff;
+  background-color: #6f35fc;
+}
+
+.dark {
+  color: #ffffff;
+  background-color: #705746;
+}
+
+.steel {
+  color: #000000;
+  background-color: #b7b7ce;
+}
+
+.fairy {
+  color: #000000;
+  background-color: #d685ad;
+}

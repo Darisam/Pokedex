@@ -90,6 +90,7 @@ const pokemonRepository = ( function() {
 const documentOutput = ( function() {
 
   const pokemonPicture = document.querySelector('.modal-body img');
+  const pokemonTypeList = document.querySelector('.modal-body .pokemon-types');
 
   // Write Pokemon list into the html document, add Event Listeners around
   // style the list elements.
@@ -120,6 +121,7 @@ const documentOutput = ( function() {
   // Show details of the a clicked pokemon.
 
   function showDetails(pokemon) {
+    pokemonTypeList.innerHTML = '';
     pokemonPicture.setAttribute('src', 'img/No_Image.svg');
     pokemonRepository.loadDetails(pokemon).then( function() {
       const pokemonHeading = document.querySelector('.modal-body h1');
@@ -128,6 +130,12 @@ const documentOutput = ( function() {
       pokemonPicture.setAttribute('alt', 'Picture of ' + pokemon.name);
       pokemonHeading.innerText = pokemon.name;
       pokemonDescription.innerText = 'Height: ' + pokemon.height / 10 + 'm';
+      pokemon.types.forEach(function (type) {
+        let pokemonType = document.createElement('span');
+        pokemonType.classList.add('badge', 'py-1', 'px-2', 'mx-2', type);
+        pokemonType.innerText = capitalizeFirst(type);
+        pokemonTypeList.appendChild(pokemonType);
+      });
     });
   }
 
