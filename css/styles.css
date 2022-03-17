@@ -1,7 +1,10 @@
+body {
+  font-size: 1.125rem;
+}
 
-body { font-size: 1.125rem; }
-
-.modal-body h1 { font-size: 1.75em; }
+.modal-body h1 {
+  font-size: 1.75rem;
+}
 
 button.modal-close {
   color: #ffffff;
