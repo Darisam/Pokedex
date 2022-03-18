@@ -80,10 +80,10 @@ const pokemonRepository = (function () {
 // Create an IIFE that handles the Html output.
 
 const documentOutput = (function () {
-  const pokemonPicture = document.querySelector('.modal-body img');
-  const pokemonTypeList = document.querySelector('.modal-body .pokemon-types');
   const pokemonHeading = document.querySelector('.modal-body h1');
   const pokemonHeight = document.querySelector('.modal-body .pokemon-height');
+  const pokemonPicture = document.querySelector('.modal-body img');
+  const pokemonTypeList = document.querySelector('.modal-body .pokemon-types');
   const pokemonList = document.querySelector('.pokemon-list');
 
   // Write Pokemon list into the html document, add Event Listeners and
@@ -119,11 +119,11 @@ const documentOutput = (function () {
   // for each type.
 
   function showDetails(pokemon) {
+    pokemonHeading.innerText = '';
+    pokemonHeight.innerText = '';
     pokemonTypeList.innerHTML = '';
     pokemonPicture.setAttribute('src', 'img/No_Image.svg');
     pokemonRepository.loadDetails(pokemon).then(function () {
-      pokemonPicture.setAttribute('src', pokemon.imageUrl);
-      pokemonPicture.setAttribute('alt', 'Picture of ' + pokemon.name);
       pokemonHeading.innerText = capitalizeFirst(pokemon.name);
       pokemonHeight.innerText = 'Height: ' + pokemon.height / 10 + 'm';
       pokemon.types.forEach(function (type) {
@@ -132,6 +132,8 @@ const documentOutput = (function () {
         pokemonType.innerText = capitalizeFirst(type);
         pokemonTypeList.appendChild(pokemonType);
       });
+      pokemonPicture.setAttribute('src', pokemon.imageUrl);
+      pokemonPicture.setAttribute('alt', 'Picture of ' + pokemon.name);
     });
   }
 
