@@ -10,5 +10,5 @@ The app was created to get familiar with Javascript in general and with AJAX and
 
 ## Details 
 
-The script is plain Javascript and conforms to ES6 standard. The data are loaded from [Pokeapi](https://pokeapi.co/RESTful), a RESTful API. The page to diplay the app is created with Bootstrap, which in turn makes use of jQuery and SASS. The necessary files are provided via the jsDelivr CDN and jQuery CDN.
+The script is plain Javascript and conforms to ES6 standard. The data are loaded from [Pokeapi](https://pokeapi.co/RESTful), a RESTful API. Bootstrap was used to create the page to diplay the app, which in turn makes use of jQuery and SASS. The necessary files are provided via the jsDelivr CDN and jQuery CDN.
 
